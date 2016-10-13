@@ -1,0 +1,42 @@
+﻿@model TesteDinamico.Models.IndexViewModel
+@{ var filtro = Model.Filtro; }
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Filtro
+    </div>
+
+    <div class="panel-body">
+        <form action="/" method="post">
+            
+            @foreach (var atributo in Model.Filtro.GetType().GetProperties())
+            {
+                var teste = atributo.GetValue(Model.Filtro);
+                <div class="col-md-3">
+                    <label>@atributo.Name</label><br />
+                    <label>@atributo.GetValue(Model.Filtro)</label><br />
+                     
+                    @*@Html.EditorFor(atributo, typeof(filtro))*@
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            @foreach (var coluna in Model.Colunas)
+            {
+                <th>@coluna.Value</th>
+            }
+        </tr>
+    </thead>
+</table>
+
